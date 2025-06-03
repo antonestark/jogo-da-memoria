@@ -10,11 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // For simplicity, we assume videos are in a 'videos' subfolder relative to index.html.
     const videoNames = [
         "AMARELO",
+        "AVERMELHADO",
         "AZUL 1",
+        "AZUL 2",
         "BEGE",
+        "BRANCO 1",
         "BRANCO 2",
+        "BRANCO 3",
+        "BRONZE",
         "COLORIR",
-        "VERMELHO"
+        "COR",
+        "DOURADO",
+        "ESCURIDÃO",
+        "ESCURO",
+        "LARANJA",
+        "lilás",
+        "marrom"
     ];
 
     let cards = [];
