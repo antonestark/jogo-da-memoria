@@ -19,7 +19,7 @@ body {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
     gap: 15px;
     margin-top: 30px;
     padding: 10px;
