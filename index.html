@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libras Match</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Jogo da Memória LIBRAS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
         <header>
-            <h1>Libras Match</h1>
-            <p class="subtitle">Teste sua memória e aprenda Libras!</p>
+            <h1>Jogo da Memória LIBRAS</h1>
+            <div class="stats">
+                <p>Pontos: <span id="score">0</span></p>
+                <p>Tentativas: <span id="moves">0</span></p>
+            </div>
         </header>
 
-        <section class="score-board">
-            <h2>Pontuação</h2>
-            <div>
-                <span class="score-value">0</span>
-            </div>
-            <p class="pairs-found">Pares encontrados: 0 de 6</p>
-        </section>
+        <div class="memory-game">
+            <!-- Cartões serão adicionados aqui pelo JavaScript -->
+        </div>
 
-        <section class="game-board">
-            <!-- Video and text cards will be dynamically added here -->
-        </section>
-
-        <!-- Removed controls as game logic is removed -->
+        <div id="win-modal" style="display: none;">
+            <h2>Parabéns!</h2>
+            <p>Você encontrou todos os pares!</p>
+            <button id="play-again">Jogar Novamente</button>
+        </div>
     </main>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

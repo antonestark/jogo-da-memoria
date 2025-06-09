@@ -1,81 +1,193 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const gameBoard = document.getElementById('game-board');
-    const scoreBoard = document.querySelector('.score-board'); // Select the score board section
+    const memoryGame = document.querySelector('.memory-game');
+    const scoreDisplay = document.getElementById('score');
+    const movesDisplay = document.getElementById('moves');
+    const winModal = document.getElementById('win-modal');
+    const playAgainButton = document.getElementById('play-again');
 
-    // List of all available video names
-    const allVideoNames = [
-        "AMARELO",
-        "AVERMELHADO",
-        "AZUL 1",
-        "AZUL 2",
-        "BEGE",
-        "BRANCO 1",
-        "BRANCO 2",
-        "BRANCO 3",
-        "BRONZE",
-        "COLORIR",
-        "COR",
-        "DOURADO",
-        "ESCURIDÃO",
-        "ESCURO",
-        "LARANJA",
-        "lilás",
-        "marrom"
+    const cardPairs = [
+        { name: "AMARELO", video: "./videos/AMARELO.mp4", text: "Amarelo" },
+        { name: "AVERMELHADO", video: "./videos/AVERMELHADO.mp4", text: "Avermelhado" },
+        { name: "AZUL 1", video: "./videos/AZUL 1.mp4", text: "Azul 1" },
+        { name: "AZUL 2", video: "./videos/AZUL 2.mp4", text: "Azul 2" },
+        { name: "BEGE", video: "./videos/BEGE.mp4", text: "Bege" },
+        { name: "BRANCO 1", video: "./videos/BRANCO 1.mp4", text: "Branco 1" },
+        { name: "BRANCO 2", video: "./videos/BRANCO 2.mp4", text: "Branco 2" },
+        { name: "BRANCO 3", video: "./videos/BRANCO 3.mp4", text: "Branco 3" }
     ];
 
-    const displayCount = 6; // Number of videos/texts to display
+    let boardLocked = false;
+    let hasFlippedCard = false;
+    let firstCard, secondCard;
+    let score = 0;
+    let moves = 0;
+    let matchedPairs = 0;
+    const totalPairs = cardPairs.length;
 
-    // Function to select random video names
-    function selectRandomVideoNames(count) {
-        const shuffledNames = [...allVideoNames].sort(() => 0.5 - Math.random());
-        return shuffledNames.slice(0, count);
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+        return array;
     }
 
-    // Function to create the display board
-    function createDisplay() {
-        // Select random names for the display
-        const selectedVideoNames = selectRandomVideoNames(displayCount);
+    function generateCards() {
+        let cardSet = [];
+        cardPairs.forEach(pair => {
+            cardSet.push({ name: pair.name, type: 'video', content: pair.video });
+            cardSet.push({ name: pair.name, type: 'text', content: pair.text });
+        });
 
-        // Clear previous board
-        gameBoard.innerHTML = '';
+        cardSet = shuffle(cardSet);
 
-        // Hide the score board as it's no longer a memory game
-        if (scoreBoard) {
-            scoreBoard.style.display = 'none';
+        memoryGame.innerHTML = ''; // Clear previous board
+        score = 0;
+        moves = 0;
+        matchedPairs = 0;
+        scoreDisplay.textContent = score;
+        movesDisplay.textContent = moves;
+        winModal.style.display = 'none'; // Hide modal
+
+        cardSet.forEach(card => {
+            const cardElement = document.createElement('div');
+            cardElement.classList.add('memory-card');
+            cardElement.dataset.name = card.name;
+            cardElement.dataset.type = card.type;
+
+            const frontFace = document.createElement('div');
+            frontFace.classList.add('front-face');
+            frontFace.textContent = '?';
+
+            const backFace = document.createElement('div');
+            backFace.classList.add('back-face');
+
+            if (card.type === 'video') {
+                const videoElement = document.createElement('video');
+                videoElement.src = card.content;
+                videoElement.loop = true;
+                videoElement.muted = true;
+                videoElement.playsinline = true;
+                backFace.appendChild(videoElement);
+            } else {
+                const textElement = document.createElement('p');
+                textElement.textContent = card.content;
+                backFace.appendChild(textElement);
+            }
+
+            cardElement.appendChild(frontFace);
+            cardElement.appendChild(backFace);
+
+            cardElement.addEventListener('click', flipCard);
+            memoryGame.appendChild(cardElement);
+        });
+    }
+
+    function flipCard() {
+        if (boardLocked) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flip');
+
+        // Play video if it's a video card
+        if (this.dataset.type === 'video') {
+            const video = this.querySelector('video');
+            if (video) {
+                video.play().catch(error => {
+                    console.error("Error playing video:", error);
+                });
+            }
         }
 
-
-        // Create HTML elements for video cards
-        selectedVideoNames.forEach(name => {
-            const cardElement = document.createElement('div');
-            cardElement.classList.add('memory-card'); // Use the memory-card class for styling
-            cardElement.classList.add('video-card'); // Add a class to distinguish video cards
-
-            const videoElement = document.createElement('video');
-            videoElement.src = `./videos/${name}.mp4`; // Assuming videos are in a 'videos' subfolder
-            videoElement.loop = true; // Loop video
-            videoElement.muted = true; // Mute video by default
-            videoElement.playsinline = true; // Add playsinline for mobile autoplay
-            videoElement.autoplay = true; // Autoplay video
-
-            cardElement.appendChild(videoElement);
-            gameBoard.appendChild(cardElement);
-        });
-
-        // Create HTML elements for text cards
-        selectedVideoNames.forEach(name => {
-            const cardElement = document.createElement('div');
-            cardElement.classList.add('memory-card'); // Use the memory-card class for styling
-            cardElement.classList.add('text-card'); // Add a class to distinguish text cards
-
-            const nameElement = document.createElement('p');
-            nameElement.textContent = name;
-
-            cardElement.appendChild(nameElement);
-            gameBoard.appendChild(cardElement);
-        });
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+        } else {
+            secondCard = this;
+            moves++;
+            movesDisplay.textContent = moves;
+            checkForMatch();
+        }
     }
 
-    // Initial display creation
-    createDisplay();
+    function checkForMatch() {
+        let isMatch = firstCard.dataset.name === secondCard.dataset.name &&
+                      firstCard.dataset.type !== secondCard.dataset.type;
+
+        if (isMatch) {
+            disableCards();
+        } else {
+            unflipCards();
+        }
+    }
+
+    function disableCards() {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+
+        // Pause videos of matched cards
+        [firstCard, secondCard].forEach(card => {
+            if (card.dataset.type === 'video') {
+                const video = card.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+            }
+        });
+
+
+        matchedPairs++;
+        score += 10; // Example score
+        scoreDisplay.textContent = score;
+
+        resetBoard();
+
+        if (matchedPairs === totalPairs) {
+            setTimeout(endGame, 500);
+        }
+    }
+
+    function unflipCards() {
+        boardLocked = true;
+
+        setTimeout(() => {
+            // Pause and reset videos before flipping back
+            [firstCard, secondCard].forEach(card => {
+                if (card.dataset.type === 'video') {
+                    const video = card.querySelector('video');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                }
+            });
+
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip');
+
+            resetBoard();
+        }, 1500); // Wait 1.5 seconds
+    }
+
+    function resetBoard() {
+        [hasFlippedCard, boardLocked] = [false, false];
+        [firstCard, secondCard] = [null, null];
+    }
+
+    function endGame() {
+        winModal.style.display = 'flex';
+        // You could update modal content here with final score/moves
+    }
+
+    function resetGame() {
+        generateCards();
+    }
+
+    playAgainButton.addEventListener('click', resetGame);
+
+    // Initial game setup
+    generateCards();
 });
