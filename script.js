@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "ESCURIDÃO",
         "ESCURO",
         "LARANJA",
-        "LILÁS",
-        "MARROM"
+        "lilás",
+        "marrom"
     ];
 
     let cards = [];
