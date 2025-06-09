@@ -27,13 +27,13 @@ body {
 }
 
 .card {
-    width: 120px;
-    height: 120px;
+    width: 300px;
+    height: 300px;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3em; /* Adjusted font size */
+    font-size: 2em; /* Increased font size for larger card */
     cursor: pointer;
     transform: rotateY(180deg);
     transition: transform 0.6s;
@@ -67,7 +67,7 @@ body {
     background-color: #ffffff; /* White background for card front content */
     color: #333; /* Dark text color */
     border-radius: 8px;
-    padding: 8px; /* Adjusted padding */
+    padding: 15px; /* Increased padding for larger card */
     box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
