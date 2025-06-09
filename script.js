@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cards.push({
                 id: index,
                 type: 'video',
-                content: `videos/${name}.MP4` // Assuming videos are in a 'videos' subfolder
+                content: `./videos/${cardName}.mp4` // Assuming videos are in a 'videos' subfolder
             });
         });
 
