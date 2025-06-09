@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "ESCURIDÃO",
         "ESCURO",
         "LARANJA",
-        "lilás",
-        "marrom"
+        "LILÁS",
+        "MARROM"
     ];
 
     let cards = [];
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cards.push({
                 id: index,
                 type: 'video',
-                content: `./videos/${cardName}.mp4` // Assuming videos are in a 'videos' subfolder
+                content: `./videos/${name}.mp4` // Assuming videos are in a 'videos' subfolder
             });
         });
 
