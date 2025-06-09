@@ -12,8 +12,9 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Manter centralizado no eixo cruzado */
     padding: 20px;
+    width: 100%; /* Permitir que o main ocupe a largura total */
 }
 
 header {
@@ -39,7 +40,7 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 80%; /* Ajuste conforme necessário, ou remova para largura automática */
-    max-width: 600px; /* Limita a largura máxima */
+    max-width: none; /* Remove limite de largura máxima */
     margin-bottom: 20px;
 }
 
@@ -62,9 +63,10 @@ h1 {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
     gap: 15px;
     margin-top: 20px;
+    width: 100%; /* Permitir que o grid ocupe a largura total disponível */
 }
 
 .memory-card {
