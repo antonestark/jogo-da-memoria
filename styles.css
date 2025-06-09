@@ -74,11 +74,12 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    aspect-ratio: 2 / 3; /* Proporção de carta de baralho */
+    width: 200px; /* Adjusted size */
+    height: 200px; /* Adjusted size */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2em; /* Adjusted font size */
     color: #aaaaaa; /* Cinza */
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
