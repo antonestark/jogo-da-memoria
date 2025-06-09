@@ -1,0 +1,110 @@
+body {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    background-color: #fdfaf2; /* Tom de creme claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #5d4037; /* Marrom escuro */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #795548; /* Tom de marrom um pouco mais claro */
+}
+
+.score-board {
+    background-color: #f5efe1; /* Tom de creme um pouco mais escuro */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%; /* Ajuste conforme necessário, ou remova para largura automática */
+    max-width: 600px; /* Limita a largura máxima */
+    margin-bottom: 20px;
+}
+
+.score-board h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.score-value {
+    color: #e53935; /* Laranja/vermelho */
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.pairs-found {
+    font-size: 1em;
+    color: #795548;
+    margin-top: 10px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.memory-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 2 / 3; /* Proporção de carta de baralho */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #aaaaaa; /* Cinza */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.memory-card:hover {
+    transform: scale(1.05);
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.restart-button {
+    background-color: #fbc02d; /* Amarelo/dourado */
+    color: #5d4037; /* Marrom escuro */
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.restart-button:hover {
+    background-color: #f9a825; /* Escurece no hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

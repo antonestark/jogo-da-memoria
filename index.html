@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Memory Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Libras Match</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>Sign Memory Game - Colors</h1>
-        <div id="game-board" class="game-board">
-            <!-- Cards will be dynamically added here -->
-        </div>
-        <button id="restart-button">Reiniciar Jogo</button>
-    </div>
+    <main>
+        <header>
+            <h1>Libras Match</h1>
+            <p class="subtitle">Teste sua memória e aprenda Libras!</p>
+        </header>
 
-    <div class="gif-section-container">
-        <h2>Sinais de Cores</h2>
-        <div id="gif-section" class="gif-section">
-            <!-- GIFs and names will be dynamically added here -->
-        </div>
-    </div>
+        <section class="score-board">
+            <h2>Pontuação</h2>
+            <div>
+                <span class="score-value">0</span>
+            </div>
+            <p class="pairs-found">Pares encontrados: 0 de 6</p>
+        </section>
 
-    <script src="script.js"></script>
+        <section class="game-board">
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+            <div class="memory-card">?</div>
+        </section>
+
+        <div class="controls">
+            <button class="restart-button">🔄 Reiniciar Jogo</button>
+        </div>
+    </main>
 </body>
 </html>
