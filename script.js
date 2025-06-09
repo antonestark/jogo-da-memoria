@@ -190,4 +190,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial board creation
     createBoard();
+    displayGifs(); // Call function to display GIFs
 });
+
+// Function to display GIFs and names
+function displayGifs() {
+    const gifSection = document.getElementById('gif-section');
+    const gifsToShow = videoNames.slice(0, 5); // Take the first 5 videos
+
+    gifsToShow.forEach(name => {
+        const gifItem = document.createElement('div');
+        gifItem.classList.add('gif-item');
+
+        const videoElement = document.createElement('video');
+        videoElement.src = `./videos/${name}.mp4`;
+        videoElement.autoplay = true;
+        videoElement.loop = true;
+        videoElement.muted = true;
+        videoElement.playsinline = true; // Add playsinline for mobile autoplay
+
+        const nameElement = document.createElement('p');
+        nameElement.textContent = name;
+
+        gifItem.appendChild(videoElement);
+        gifItem.appendChild(nameElement);
+        gifSection.appendChild(gifItem);
+    });
+}

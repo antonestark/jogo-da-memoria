@@ -97,3 +97,42 @@ body {
 .card.matched .card-back {
     border: 3px solid #ffeb3b; /* Yellow border for matched cards */
 }
+
+.gif-section-container {
+    margin-top: 40px;
+    text-align: center;
+    background-color: #ffffff; /* White background for container */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.gif-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between GIF items */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    margin-top: 20px;
+}
+
+.gif-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px; /* Fixed width for each item */
+}
+
+.gif-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc; /* Optional border */
+}
+
+.gif-item p {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+}
